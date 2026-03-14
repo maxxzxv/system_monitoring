@@ -11,6 +11,7 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 ### Required
 - Python 3.11
 - PostgreSQL
+- Grafana 12.4.1
 - (Optional) Docker & Docker Compose for easy setup.
 ### 1. Clone the repository
 `git clone https://github.com/maxxzxv/system_monitoring.git`
@@ -30,6 +31,12 @@ change the database name, username, and password
     - POST /metrics -> send CPU/memory/disk data
 ### 5. Run the Collector
 `python collector/collect_metrics.py`
-### 6. (Optional) Build with Docker
+### 6. Configure Grafana
+- Login into Grafana under `https://127.0.0.1:3000`
+    - Default credentials `admin / admin`
+- Create new dashboard
+- Configure visualiations for cpu, memory, and disk. Example query:
+`SELECT "timestamp" AS "time", cpu AS value FROM metrics ORDER BY timestamp ASC`
+### 7. (Optional) Build with Docker
 `docker-compose up --build`
 

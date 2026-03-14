@@ -10,6 +10,18 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  
+  grafana:
+    image: grafana/grafana-enterprise:12.4.1
+    container_name: grafana_enterprise
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana_storage:/var/lib/grafana"
+    restart: unless-stopped
+    depends_on:
+      - db
 
 volumes:
   pgdata:
+  grafana_storage:
