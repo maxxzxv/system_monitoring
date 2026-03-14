@@ -5,6 +5,7 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 - Collects real-time CPU, memory, and disk usage using psutil.
 - Provides REST API to store and retrieve metrics with FastAPI.
 - Stores metrics in PostgreSQL.
+- Provides real-time metrics visualization in Grafana.
 - Docker-ready for easy setup.
 
 ## Getting Started
