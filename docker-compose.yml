@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: system_monitoring_db
+    environment:
+      POSTGRES_USER: monitoring_user
+      POSTGRES_PASSWORD: mntusr-pass-3517
+      POSTGRES_DB: monitoring_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
