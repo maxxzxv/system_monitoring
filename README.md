@@ -26,8 +26,8 @@ change the database name, username, and password
 `uvicorn app.main:app --reload`
 - API docs available at https://127.0.0.1:8000/docs
 - Endpoints:
-+ GET / -> test endpoint
-+ POST /metrics -> send CPU/memory/disk data
+    - GET / -> test endpoint
+    - POST /metrics -> send CPU/memory/disk data
 ### 5. Run the Collector
 `python collector/collect_metrics.py`
 ### 6. (Optional) Build with Docker
