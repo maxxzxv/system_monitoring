@@ -27,7 +27,7 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 - Include `DATABASE_URL=postgresql://username:password@hostname:port/database_name`
 ### 4. Configure PostgreSQL
 - Update docker-compose.yml with your information:
-- change the database name, username, and password
+    - change the database name, username, and password
 ### 5. Run the API
 - Start Docker
 - Start PostgreSQL and Grafana:
@@ -40,10 +40,10 @@ A simple system monitoring project written in Python that collects CPU, memory, 
     - GET /health -> API health check
     - GET /metrics -> Retrieve latest metrics 
     - POST /metrics -> send metrics
-### 5. Run the Collector
+### 6. Run the Collector
 - Start metrics collector from the project root folder:
     - `python collector/collect_metrics.py`
-### 6. Configure Grafana
+### 7. Configure Grafana
 - Login into Grafana under `https://127.0.0.1:3000`
     - Default credentials `admin / admin`
 - Configure PostgreSQL data source:
@@ -51,6 +51,6 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 - Create new dashboard
 - Configure visualiations for cpu, memory, and disk. Example query:
     - `SELECT "timestamp" AS "time", cpu AS value FROM metrics ORDER BY timestamp ASC`
-### 7. (Optional) Build with Docker
+### 8. (Optional) Build with Docker
 `docker-compose up --build`
 
