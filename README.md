@@ -6,6 +6,9 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 - Provides REST API to store and retrieve metrics with FastAPI.
 - Stores metrics in PostgreSQL.
 - Provides real-time metrics visualization in Grafana.
+- Environment variable configuration.
+- Health check endpoint.
+- Logging for incoming metrics.
 - Docker-ready for easy setup.
 
 ## Getting Started
@@ -15,29 +18,39 @@ A simple system monitoring project written in Python that collects CPU, memory, 
 - Grafana 12.4.1
 - (Optional) Docker & Docker Compose for easy setup.
 ### 1. Clone the repository
-`git clone https://github.com/maxxzxv/system_monitoring.git`
-`cd system_monitoring`
+- `git clone https://github.com/maxxzxv/system_monitoring.git`
+- `cd system_monitoring`
 ### 2. Install dependencies
-`pip install -r requirements.txt`
-### 3. Configure PostgreSQL
+- `pip install -r requirements.txt`
+### 3. Configure Environment Variables
+- Create an `.env` file in the project root
+- Include `DATABASE_URL=postgresql://username:password@hostname:port/database_name`
+### 4. Configure PostgreSQL
 - Update docker-compose.yml with your information:
-change the database name, username, and password
-- Update app/database.py with your information:
-`DATABASE_URL = "postgresql://monitoring_user:strongpassword@localhost:5432/monitoring_db"`
-### 4. Run the API
-`uvicorn app.main:app --reload`
-- API docs available at https://127.0.0.1:8000/docs
+- change the database name, username, and password
+### 5. Run the API
+- Start Docker
+- Start PostgreSQL and Grafana:
+    - `docker compose up -d`
+- Start the API:
+    - `uvicorn app.main:app --reload`
+    - API docs available at https://127.0.0.1:8000/docs
 - Endpoints:
     - GET / -> test endpoint
-    - POST /metrics -> send CPU/memory/disk data
+    - GET /health -> API health check
+    - GET /metrics -> Retrieve latest metrics 
+    - POST /metrics -> send metrics
 ### 5. Run the Collector
-`python collector/collect_metrics.py`
+- Start metrics collector from the project root folder:
+    - `python collector/collect_metrics.py`
 ### 6. Configure Grafana
 - Login into Grafana under `https://127.0.0.1:3000`
     - Default credentials `admin / admin`
+- Configure PostgreSQL data source:
+    - Use data configured in `docker-compose.yml`
 - Create new dashboard
 - Configure visualiations for cpu, memory, and disk. Example query:
-`SELECT "timestamp" AS "time", cpu AS value FROM metrics ORDER BY timestamp ASC`
+    - `SELECT "timestamp" AS "time", cpu AS value FROM metrics ORDER BY timestamp ASC`
 ### 7. (Optional) Build with Docker
 `docker-compose up --build`
 
